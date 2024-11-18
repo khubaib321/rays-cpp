@@ -165,7 +165,7 @@ public:
     }
 
     void draw(sf::RenderWindow& window) override {
-        set_end_point();
+        calculate_end_point();
         sf::Vertex line[] = {
             sf::Vertex(sf::Vector2f(source.x, source.y), color),
             sf::Vertex(sf::Vector2f(end_point.x, end_point.y), color)
@@ -173,7 +173,7 @@ public:
         window.draw(line, 2, sf::Lines);
     }
 
-    void set_end_point();
+    void calculate_end_point();
 
     Point intersects_line(const BoundaryWall& line) const;
 };
@@ -181,7 +181,7 @@ public:
 // Globals
 std::vector<std::shared_ptr<BoundaryWall> > WALLS;
 
-void Ray::set_end_point() {
+void Ray::calculate_end_point() {
     float nearest_wall_distance = length;
     bool found_intersection = false;
 
@@ -302,7 +302,7 @@ void LightSource::draw_rays(sf::RenderWindow& window) {
         // ray.draw(window);
         // To reduce draw calls (and potential gpu bottleneck), set the ray endpoint explicitly 
         // and batch all lines into a single draw call
-        ray.set_end_point(); // Call this explicitly
+        ray.calculate_end_point(); // Call this explicitly
         
         // Add the vertices to the VertexArray
         lines.append(sf::Vertex(sf::Vector2f(ray.source.x, ray.source.y), ray.color));
@@ -392,7 +392,6 @@ int main() {
     sf::Clock clock;
     float fps = 0.0f;
     float avgFps = 0.0f;
-    float DELTA_TIME = 0.0f;
     // Main loop
     while (running) {
         // Start measuring time
