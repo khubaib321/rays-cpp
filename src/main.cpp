@@ -285,8 +285,8 @@ public:
             float angle = i * 2 * PI / ray_density;
             Ray ray(pos, angle, static_cast<float>(TOTAL_PIXELS), color);
             // ray.draw(window);
-            // To reduce draw calls (and potential gpu bottleneck)
-            // and batch all lines into a single draw call calculate the ray endpoint explicitly 
+            // To reduce draw calls and potential gpu bottleneck,
+            // calculate the ray endpoint explicitly and batch all lines into a single draw call
             ray.calculate_end_point();
 
             // Add the vertices to the VertexArray
