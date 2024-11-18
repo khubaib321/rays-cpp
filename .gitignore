@@ -1,0 +1,7 @@
+# Created according to C++ in CLion
+
+CMakeLists.txt
+.idea/*
+.DS_Store*
+cmake-build-*
+rays
